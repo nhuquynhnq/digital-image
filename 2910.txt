@@ -1,0 +1,16 @@
+- se: ?nh nh? (Structuring element).
+-pép m? r?ng( dialation): b? se vào ?nh n?u các di?m có kích thu?c = se or giao vs se thì nó s? thay = se.
+-phéo erosion: xung quanh di?m có se thì giu l?i
+
+=>dilate: b?t l? h?ng tang kích thu?c.
+-erode: t?o kho?ng h?, co kích thu?c.
+- ch? du?c m? ?nh 1 l?n (ngaoij tr? d?i se) tuong tu doi voi anh dong
+hit or mit tìm nh?ng di?m ?nh có hình d?ng này và ko có hình d?ng ki
+- opening
+tAO KERNEL	 = NP.ONES(3,3),UINT8
+-CV2.DIALET(IMAGE,KERNEL,iterations=1)\
+t?o se kernel = cv2.getStructureElement(cv2...,(9,9))
+cv2.morphologyEx(I,cv2.HOURP_CLOSE,kernel) ham tong quat goi tat ca ac ham open close dialate,erosion,..
+
+
+

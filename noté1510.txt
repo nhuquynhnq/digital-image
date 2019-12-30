@@ -1,0 +1,39 @@
+Image restoration 1
+-noisy face=np.copy(face).astype(np.float)
+noisy_face+=face.std() *0.5*
+np.random.stardard_nomal(face.shape)
+- import ndimgae in spicy,sigma
+- dùng ndimage.gausian_filter và median filter vaf signal.wiener
+copy 1 cái ?nh
+dùng hàm copy
+Ho?c dùng medianBlur(7)
+Cu?i k?:
+Giao di?n có menu file m? ?nh hi?n th? trên màn hình.
+View có zoom in, out, fix to window và true scale.
+Menu cu?i là các bài t?p.
+Bluring and sharpening :gaussian, average, median
+?nh s?c = g?c - m?.
+-26/11 (3 tu?n n?a là xong).
+hUONG gradiant xác d?nh b?i hu?ng d?c chia cho hu?ng ngang.
+biên d?=tr? tuy?t d?i hu?ng ngang+hu?ng d?c
+-d? so sánh tuong d?i ch? l?y hai c?nh góc vuông.
+ch?p= t?ng c?a các tích.
+SNR:t? l? l?i và nhi?u.
+- N?i c?nh dùng houghtransform.
+cv2.cvColor(image,cv2COLOR_BGR2GRAY)
+edgeds=cv2.Canny(gray,100,200,apertureSize=3)
+lines=cv2.HoughLines(edges,1,np.pi/180,350)
+
+Gi?i thu?t houghLine
+for line in lines:
+   for rho,theta in line: 
+     a=np.cos(theta)
+     b=np.sin(theta)
+     x0=a*rho
+     y0=b*rho
+     x1=int(x0+1000*(-b))
+     y1=int(y0+1000*(a))
+     x2=int(x0-1000*(-b))
+     y2=int(y0-1000*(a))
+tham kh?o open-cv-python-tutorial-readthedocs.io
+

@@ -1,0 +1,21 @@
+cv2.videoCaptue
+- while cap.isOpened():
+    ret,frame = cap.read()//Lay frame
+    frame = process(frame)
+process:
+
+height=
+width=
+region_of_iterest_vertical=[(0,height),(width/2,height/2),(width,height)]
+gray_image=cv2.cvtColor(image,cv2.COLOR_RGB2GRAy)
+=>canny(100,120)
+cropped_image = region_of_interser_vertical(canny_image,np.array([region_of_interest_vertical],np.int,)//Giu lai khung hinh can xu ly)
+line=>hough line.//lay ra cac canh thuc su(rho=2,theta=np.pi/180,threshold=50,lines=np.array([])....
+-Gi?i thu?t ransac.
+- Dung dao ham bac hai de detect net day dung dao ham bac 1 de do co gia tri bien do lon de tim nhung diem thuoc vao c?nhhk
+-Bai Tap
+loc gaussian non =3
+dung canny => goi hough ma tran =>tim nguong
+ch?n k sao varian nào mà within class variance nh?
+inter class l?n
+

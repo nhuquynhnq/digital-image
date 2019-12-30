@@ -1,0 +1,103 @@
+﻿Write the functions in chapter 2, 3 in of "Xu ly anh so" book from Dr. Viet+Adaptive histogram Equalization.
+Write the functions in the GUIs that you developed on Tue 10/09/2019.
+=====================================================My Answer ===============================================
+import numpy as np
+import cv2
+from PIL import ImageOps, Image
+from scipy import interpolate
+from PIL import Image
+import requests
+from io import BytesIO
+"""Bai 3.7 chương 2"""
+def bicubic(u):
+    x_points = [0, 1, 2 ,3, 4, 5]
+    y_points = [12, 14, 22, 39 ,58 ,77]
+    tck = interpolate.splrep(x_points,y_points)
+    return interpolate.splev(u,tck)
+print(bicubic(1.25
+"""Bai 3.1 chuong 3"""
+x = np.array([(200, 100, 100), (0, 10, 50), [50, 250, 120]])
+k = 5
+def addImage(array, k):
+    if(type(k)==int):
+        b = np.array([k])
+        z = array + b
+        fmax = np.max(z)
+        fmin = np.min(z)
+        k = 255*((z-fmin)/(fmax - fmin))
+    else:
+        z = array + k
+        fmax = np.max(z)
+        fmin = np.min(z)
+        k = 255 * ((z - fmin) / (fmax - fmin))
+    return k
+
+"""Bai 3.2"""
+"""Solarization"""
+"""T=freshold=130"""
+def solarization(t):
+ img = Image.open(r"seulgi.jpg")
+ image=ImageOps.solarize(img, threshold=t)
+ image.show()
+"""solarization(130)"""
+"""Bai 3.3"""
+def transformation(c,b):
+    img = cv2.imread("seulgi.jpg")
+    img_size = img.shape
+    for i in range(0,img_size[0]):
+        for j in range(0,img_size[1]):
+            kernel=img[i,j]
+            img[i,j] = c*kernel+b
+    cv2.imwrite("test.jpg",img)
+"""transformation(2,3)"""
+def multiply(t):
+    img = cv2.imread("seulgi.jpg")
+    img_size = img.shape
+    for i in range(0, img_size[0]):
+        for j in range(0, img_size[1]):
+            kernel = img[i, j]
+            img[i, j] = kernel * t
+    cv2.imwrite("change.jpg", img)
+"""multiply(0.1)"""
+"""Bai Adaptive histogram equalization"""
+def adaptivehistogram():
+   img = cv2.imread('seulgi.jpg',0)
+   print(img)
+   img_size = img.shape
+   print(img_size)
+   img_mod = np.zeros((600, 800))
+   for i in range(0, img_size[0]-40):
+    for j in range(0, img_size[1]-40):
+        kernel = img[i:i+30, j:j+40]
+        for k in range(0, 30):
+            for l in range(0, 30):
+                element = kernel[k, l]
+                rank = 0
+                for m in range(0, 30):
+                    for n in range(0, 30):
+                        if(kernel[k,l] > kernel[m,n]):
+                              rank = rank + 1
+                else: img_mod[i,j] = ((rank * 255)/900)
+    im = np.array(img_mod, dtype = np.uint8)
+    cv2.imwrite('kq.jpg', im)
+adaptivehistogram()
+"""function GUI"""
+   def __init__(self):
+        super(Demo,self).__init__()
+        loadUi('project.ui',self)
+        self.btnImage.clicked.connect(self.handleActivated)
+
+
+
+
+    def initUI(self):
+        self.show()
+
+    def handleActivated(self):
+        fname = QFileDialog.getOpenFileName(self, 'Open file',
+                                            'F:\\XLAS', "Image files (*.jpg *.tif *.png)")
+        self.image = fname[0]
+        self.pixmapImage = QtGui.QPixmap(self.image)
+        self.labelimg.setPixmap(self.pixmapImage)
+        self.labelimg.setScaledContents(True)
+        self.labelimg.show()
